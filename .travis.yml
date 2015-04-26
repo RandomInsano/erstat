@@ -16,4 +16,4 @@ osx_image: xcode61
 script:
   - mkdir build && cd build
   - cmake ..
-
+  - make
