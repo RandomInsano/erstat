@@ -11,7 +11,7 @@
 struct Process {
 	std::string name;
 	std::string user;
-	size_t memort_resident;
+	size_t memory_resident;
 };
 
 class MachineInfo {
@@ -23,12 +23,23 @@ public:
 
 class MachineOSXInfo : public MachineInfo {
 public:
-	void GetTermDimensions(winsize& term_size)
-	{
+	void GetTermDimensions(winsize& term_size) {
 		ioctl(STDOUT_FILENO, TIOCGWINSZ, &term_size);
 	}
 
 	std::list<Process> GetProcesses() {
-		return std::list<Process>();
+		auto processes = std::list<Process>();
+		Process* proc;
+
+		for (auto i = 0; i < 100; i++) {
+			proc = new Process();
+			proc->name = "Process" + std::to_string(i);
+			proc->user = "edwin";
+			proc->memory_resident = 12;
+
+			processes.push_back(*proc);
+		}
+
+		return processes;
 	}
 };
