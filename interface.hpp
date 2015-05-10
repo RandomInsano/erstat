@@ -20,23 +20,26 @@ public:
 };
 
 class MachineOSXInfo : public MachineInfo {
-	// Nothing really is different here...
-
-	int _GetIntEnv(const char* var, int def)
-	{
-		auto item = getenv ("COLUMNS");
-		if (item != NULL) {
-			return atoi(item);
-		}
-
-		return def;
-	}
-
+public:
 	int GetTermX() {
 		return _GetIntEnv("COLUMNS", 80);
 	}
 
 	int GetTermY() {
 		return _GetIntEnv("LINES", 24);
+	}
+
+	std::list<Process> GetProcesses() {
+		return std::list<Process>();
+	}
+
+	int _GetIntEnv(const char* var, int def)
+	{
+		auto item = getenv(var);
+		if (item != NULL) {
+			return atoi(item);
+		}
+
+		return def;
 	}
 };
