@@ -8,5 +8,7 @@ int main(int argc, char **argv)
 {
 	auto info = MachineOSXInfo();
 
-	cout << "Inferface: " << info.GetTermX() << "x" << info.GetTermY() << endl;
+	winsize size;
+	info.GetTermDimensions(size);
+	cout << "Inferface: " << size.ws_col << "x" << size.ws_row << endl;
 }
